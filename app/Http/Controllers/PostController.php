@@ -8,12 +8,22 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
-    {
-        $posts = Post::with(['user', 'category'])->withCount('comments')->latest()->paginate(10);
-        $categories = Category::orderBy('name')->get();
-        return view('posts.index', compact('posts', 'categories'));
-    }
+       public function index(Request $request)
+   {
+       $posts = Post::with(['user', 'category'])
+           ->withCount('comments')
+           ->when($request->category_id, fn($q, $id) => $q->where('category_id', $id))
+           ->when($request->search, fn($q, $search) => 
+               $q->where('title', 'like', "%{$search}%")
+                 ->orWhere('body', 'like', "%{$search}%")
+           )
+           ->latest()
+           ->paginate(10)
+           ->withQueryString(); // PENTING: agar filter tetap ada saat pindah halaman
+
+       $categories = Category::orderBy('name')->get();
+       return view('posts.index', compact('posts', 'categories'));
+   }
 
     public function create()
     {
@@ -26,7 +36,7 @@ class PostController extends Controller
         $data = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'title' => 'required|string|max:255',
-            'body' => 'required|string|min:10',
+            'body' => 'required|string|min:1',
         ]);
 
         $data['user_id'] = auth()->id();
