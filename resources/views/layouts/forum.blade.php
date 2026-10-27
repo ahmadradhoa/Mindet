@@ -177,6 +177,38 @@
         [data-theme="dark"] .dropdown-item { color: #f1f5f9; }
         [data-theme="dark"] .dropdown-item:hover { background-color: #334155; color: #f1f5f9; }
         [data-theme="dark"] .dropdown-divider { border-color: #334155; }
+        /* Kartu tanpa efek hover (untuk form) */
+.card-modern.no-hover:hover {
+    transform: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border-color: #e2e8f0;
+}
+[data-theme="dark"] .card-modern.no-hover:hover {
+    border-color: #334155;
+}
+
+/* Label & tombol di dark mode */
+[data-theme="dark"] .form-label,
+[data-theme="dark"] label {
+    color: var(--text-main);
+}
+[data-theme="dark"] .btn-outline-secondary {
+    color: #cbd5e1;
+    border-color: #475569;
+}
+[data-theme="dark"] .btn-outline-secondary:hover {
+    background-color: #334155;
+    color: #f1f5f9;
+    border-color: #475569;
+}
+
+/* Jaga-jaga kalau masih ada .card / .bg-white bawaan Bootstrap */
+[data-theme="dark"] .card,
+[data-theme="dark"] .bg-white {
+    background-color: var(--card-bg) !important;
+    border-color: #334155;
+    color: var(--text-main);
+}
     </style>
 </head>
 <body>
@@ -255,7 +287,7 @@
 </div>
 
 <footer class="text-center text-muted small py-5 mt-5">
-    <p class="mb-0">© 2024 <strong>Mindent</strong>. Dibuat dengan ❤️ menggunakan Laravel.</p>
+    <p class="mb-0">© 2026 <strong>Mindet</strong></p>
 </footer>
 
 <!-- SweetAlert2 & Bootstrap JS -->
@@ -292,27 +324,31 @@
     });
 
     // 3. Dark Mode Logic
-    const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
-    const themeIcons = document.querySelectorAll('#theme-icon, #theme-icon-mobile');
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    updateIcons(currentTheme);
+// 3. Dark Mode Logic
+const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+const themeIcons = document.querySelectorAll('#theme-icon, #theme-icon-mobile');
 
-    themeToggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateIcons(newTheme);
-        });
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-bs-theme', theme); // <-- ini kuncinya
+    localStorage.setItem('theme', theme);
+    updateIcons(theme);
+}
+
+function updateIcons(theme) {
+    themeIcons.forEach(icon => {
+        icon.className = theme === 'light' ? 'bi bi-moon-stars-fill' : 'bi bi-sun-fill';
     });
+}
 
-    function updateIcons(theme) {
-        themeIcons.forEach(icon => {
-            icon.className = theme === 'light' ? 'bi bi-moon-stars-fill' : 'bi bi-sun-fill';
-        });
-    }
+applyTheme(localStorage.getItem('theme') || 'light');
+
+themeToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        applyTheme(newTheme);
+    });
+});
 </script>
 </body>
 </html>
