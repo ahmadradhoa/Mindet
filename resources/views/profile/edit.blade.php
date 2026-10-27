@@ -15,11 +15,10 @@
                             : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) . '&background=6366f1&color=fff&size=128';
                     @endphp
                     <img src="{{ $avatarUrl }}" class="rounded-circle mb-3 border border-3 border-primary" width="128" height="128" style="object-fit: cover;">
-                    <p class="text-muted small">Foto profil saat ini</p>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Nama Lengkap</label>
+                    <label class="form-label fw-semibold">Username</label>
                     <input type="text" name="name" class="form-control" value="{{ old('name', auth()->user()->name) }}" required>
                 </div>
 
