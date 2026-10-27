@@ -11,7 +11,6 @@
     </a>
 </div>
 
-<!-- Form Search & Filter -->
 <div class="card card-modern p-3 mb-4">
     <form method="GET" action="{{ route('posts.index') }}" class="row g-2 align-items-end">
         <div class="col-md-4">
@@ -59,7 +58,6 @@
             <div class="small text-muted" style="font-size: 0.7rem;">{{ $p->created_at->diffForHumans() }}</div>
         </div>
         
-        <!-- Konten Postingan -->
         <div class="flex-grow-1">
             <div class="d-flex align-items-center gap-2 mb-1">
                 <span class="badge-category">{{ $p->category->name }}</span>

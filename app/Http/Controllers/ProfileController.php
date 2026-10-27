@@ -22,12 +22,10 @@ class ProfileController extends Controller
         $data = ['name' => $request->name];
 
         if ($request->hasFile('profile_picture')) {
-            // Hapus foto lama jika ada
             if ($user->profile_picture && file_exists(public_path('images/profiles/' . $user->profile_picture))) {
                 unlink(public_path('images/profiles/' . $user->profile_picture));
             }
             
-            // Simpan foto baru
             $file = $request->file('profile_picture');
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('images/profiles'), $filename);

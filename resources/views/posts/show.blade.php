@@ -5,7 +5,6 @@
     <i class="bi bi-arrow-left"></i> Kembali ke Beranda
 </a>
 
-<!-- Kartu Postingan Utama -->
 <div class="card card-modern p-4 mb-4">
     <div class="d-flex align-items-center gap-3 mb-3">
         <img src="https://ui-avatars.com/api/?name={{ urlencode($post->user->name) }}&background=6366f1&color=fff&rounded=true" class="avatar" alt="User">
@@ -29,7 +28,6 @@
     @endif
 </div>
 
-<!-- Bagian Komentar -->
 <h5 class="fw-bold mb-3"><i class="bi bi-chat-left-text me-2"></i>{{ $post->comments->count() }} Komentar</h5>
 
 @foreach($post->comments->sortBy('created_at') as $c)
@@ -53,7 +51,6 @@
 </div>
 @endforeach
 
-<!-- Form Tambah Komentar -->
 <div class="card card-modern p-4 ms-md-4 mt-4 bg-light">
     <h6 class="fw-bold mb-3">Tulis Komentar</h6>
     <form method="POST" action="{{ route('comments.store', $post) }}">

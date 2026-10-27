@@ -19,7 +19,7 @@ class PostController extends Controller
            )
            ->latest()
            ->paginate(10)
-           ->withQueryString(); // PENTING: agar filter tetap ada saat pindah halaman
+           ->withQueryString();
 
        $categories = Category::orderBy('name')->get();
        return view('posts.index', compact('posts', 'categories'));

@@ -6,16 +6,13 @@
     <title>Mindet</title>
     <link rel="icon" type="image/png" href="{{ asset('image/Mindet_Logo.png') }}">
     
-    <!-- Modern Font: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Bootstrap 5 & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     
-    <!-- Custom UI/UX CSS & Dark Mode Variables -->
     <style>
         :root {
             --primary-color: #6366f1;
@@ -123,18 +120,17 @@
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
         }
 
-        /* === FIX SEARCH BOX & INPUT GROUP === */
         .input-group-text {
             background-color: transparent !important;
             border: 1px solid #cbd5e1;
             border-right: none;
             color: var(--text-muted);
         }
+
         .form-control.border-start-0 {
             border-left: none !important;
         }
 
-        /* === DARK MODE OVERRIDES (LENGKAP) === */
         [data-theme="dark"] .text-dark { color: var(--text-main) !important; }
         [data-theme="dark"] .text-muted { color: var(--text-muted) !important; }
         [data-theme="dark"] .fw-bold, [data-theme="dark"] .fw-semibold, [data-theme="dark"] strong { color: var(--text-main) !important; }
@@ -170,7 +166,6 @@
         [data-theme="dark"] .card-modern a.text-dark { color: #f1f5f9 !important; }
         [data-theme="dark"] .card-modern a.text-dark:hover { color: #cbd5e1 !important; }
 
-        /* Dropdown Dark Mode */
         [data-theme="dark"] .dropdown-menu {
             background-color: #1e293b;
             border-color: #334155;
@@ -178,38 +173,36 @@
         [data-theme="dark"] .dropdown-item { color: #f1f5f9; }
         [data-theme="dark"] .dropdown-item:hover { background-color: #334155; color: #f1f5f9; }
         [data-theme="dark"] .dropdown-divider { border-color: #334155; }
-        /* Kartu tanpa efek hover (untuk form) */
-.card-modern.no-hover:hover {
-    transform: none;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    border-color: #e2e8f0;
-}
-[data-theme="dark"] .card-modern.no-hover:hover {
-    border-color: #334155;
-}
 
-/* Label & tombol di dark mode */
-[data-theme="dark"] .form-label,
-[data-theme="dark"] label {
-    color: var(--text-main);
-}
-[data-theme="dark"] .btn-outline-secondary {
-    color: #cbd5e1;
-    border-color: #475569;
-}
-[data-theme="dark"] .btn-outline-secondary:hover {
-    background-color: #334155;
-    color: #f1f5f9;
-    border-color: #475569;
-}
+        .card-modern.no-hover:hover {
+            transform: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-color: #e2e8f0;
+        }
+        [data-theme="dark"] .card-modern.no-hover:hover {
+            border-color: #334155;
+        }
 
-/* Jaga-jaga kalau masih ada .card / .bg-white bawaan Bootstrap */
-[data-theme="dark"] .card,
-[data-theme="dark"] .bg-white {
-    background-color: var(--card-bg) !important;
-    border-color: #334155;
-    color: var(--text-main);
-}
+        [data-theme="dark"] .form-label,
+        [data-theme="dark"] label {
+            color: var(--text-main);
+        }
+        [data-theme="dark"] .btn-outline-secondary {
+            color: #cbd5e1;
+            border-color: #475569;
+        }
+        [data-theme="dark"] .btn-outline-secondary:hover {
+            background-color: #334155;
+            color: #f1f5f9;
+            border-color: #475569;
+        }
+
+        [data-theme="dark"] .card,
+        [data-theme="dark"] .bg-white {
+            background-color: var(--card-bg) !important;
+            border-color: #334155;
+            color: var(--text-main);
+        }
     </style>
 </head>
 <body>
@@ -217,7 +210,6 @@
 <nav class="navbar navbar-expand-lg sticky-top mb-4">
   <div class="container" style="max-width: 900px;">
     <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('posts.index') }}">
-        <!-- Pastikan folder 'images' ada di public, dan file bernama Mindent_Logo.png -->
         <img src="{{ asset('image/Mindet_Logo.png') }}" alt="Mindet Logo" height="35" class="d-inline-block align-text-top">
         <span class="fw-bold">Mindet</span>
     </a>
@@ -246,7 +238,6 @@
                     ? asset('images/profiles/' . auth()->user()->profile_picture) 
                     : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) . '&background=6366f1&color=fff&rounded=true';
             @endphp
-            <!-- Hapus class text-dark, ganti dengan style variable agar ikut dark mode -->
             <a href="#" class="d-flex align-items-center gap-2 text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="color: var(--text-main);">
                 <img src="{{ $navAvatar }}" class="avatar" alt="User">
                 <span class="fw-semibold small d-none d-md-block">{{ auth()->user()->name }}</span>
@@ -291,24 +282,20 @@
     <p class="mb-0">© 2026 <strong>Mindet</strong></p>
 </footer>
 
-<!-- SweetAlert2 & Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // 1. SweetAlert2 Notifications
     @if(session('error'))
         Swal.fire({ icon: 'error', title: 'Oops...', text: '{{ session('error') }}' });
     @endif
 
-    // 3. Dark Mode Logic
-// 3. Dark Mode Logic
 const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
 const themeIcons = document.querySelectorAll('#theme-icon, #theme-icon-mobile');
 
 function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.setAttribute('data-bs-theme', theme); // <-- ini kuncinya
+    document.documentElement.setAttribute('data-bs-theme', theme);
     localStorage.setItem('theme', theme);
     updateIcons(theme);
 }
