@@ -50,7 +50,7 @@
 
             <p class="text-sm text-gray-600">
                 Don't have an account yet? 
-                <a href="{{ route('register') }}" class="font-semibold text-gray-800 hover:text-gray-500">
+                <a href="{{ route('register') }}" class="font-semibold text-indigo-500 hover:text-indigo-600">
                     Register
                 </a>
             </p>
