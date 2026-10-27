@@ -73,24 +73,27 @@
             </h5>
             <p class="text-muted small mb-3" style="line-height: 1.6;">{{ Str::limit($p->body, 180) }}</p>
             
-            <div class="d-flex align-items-center gap-3 text-muted small">
-                <span class="d-flex align-items-center gap-1">
-                    <i class="bi bi-chat-dots"></i> {{ $p->comments_count }} Komentar
-                </span>
-                
-                @if($p->user_id === auth()->id())
-                    <div class="vr"></div>
-                    <a href="{{ route('posts.edit', $p) }}" class="text-decoration-none text-warning fw-semibold" onclick="event.stopPropagation()">
-                        <i class="bi bi-pencil"></i> Edit
-                    </a>
-                    <form action="{{ route('posts.destroy', $p) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus postingan ini?')">
-                        @csrf @method('DELETE')
-                        <button class="btn btn-link text-danger text-decoration-none fw-semibold p-0" onclick="event.stopPropagation()">
-                            <i class="bi bi-trash"></i> Hapus
-                        </a>
-                    </form>
-                @endif
-            </div>
+<div class="d-flex align-items-center gap-3 text-muted small position-relative" style="z-index: 2;">
+    <span class="d-flex align-items-center gap-1">
+        <i class="bi bi-chat-dots"></i> {{ $p->comments_count }} Komentar
+    </span>
+
+    @if($p->user_id === auth()->id())
+        <div class="vr"></div>
+
+        <a href="{{ route('posts.edit', $p) }}" class="btn btn-outline-warning btn-sm">
+            <i class="bi bi-pencil me-1"></i> Edit
+        </a>
+
+        <form action="{{ route('posts.destroy', $p) }}" method="POST" class="d-inline form-delete">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-trash me-1"></i> Hapus
+            </button>
+        </form>
+    @endif
+</div>
         </div>
     </div>
 </div>

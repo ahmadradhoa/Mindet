@@ -297,32 +297,9 @@
 
 <script>
     // 1. SweetAlert2 Notifications
-    @if(session('success'))
-        Swal.fire({ icon: 'success', title: 'Berhasil!', text: '{{ session('success') }}', timer: 2500, showConfirmButton: false });
-    @endif
     @if(session('error'))
         Swal.fire({ icon: 'error', title: 'Oops...', text: '{{ session('error') }}' });
     @endif
-
-    // 2. Custom Confirm Delete
-    document.querySelectorAll('form[onsubmit*="confirm"]').forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Yakin mau hapus?',
-                text: "Data yang dihapus tidak bisa dikembalikan!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ef4444',
-                cancelButtonColor: '#94a3b8',
-                confirmButtonText: 'Ya, Hapus!',
-                cancelButtonText: 'Batal',
-                borderRadius: '16px'
-            }).then((result) => {
-                if (result.isConfirmed) { this.submit(); }
-            });
-        });
-    });
 
     // 3. Dark Mode Logic
 // 3. Dark Mode Logic

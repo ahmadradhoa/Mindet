@@ -21,7 +21,7 @@
     @if($post->user_id === auth()->id())
         <div class="d-flex gap-2 mt-4 pt-3 border-top">
             <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil"></i> Edit Postingan</a>
-            <form method="POST" action="{{ route('posts.destroy', $post) }}" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
+            <form method="POST" action="{{ route('posts.destroy', $post) }}" class="d-inline">
                 @csrf @method('DELETE')
                 <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Hapus Postingan</button>
             </form>
@@ -44,7 +44,7 @@
             </div>
         </div>
         @if($c->user_id === auth()->id())
-            <form method="POST" action="{{ route('comments.destroy', $c) }}" onsubmit="return confirm('Hapus komentar?')">
+            <form method="POST" action="{{ route('comments.destroy', $c) }}">
                 @csrf @method('DELETE')
                 <button class="btn btn-link text-danger text-decoration-none p-0" style="font-size: 0.8rem;"><i class="bi bi-trash"></i></button>
             </form>
