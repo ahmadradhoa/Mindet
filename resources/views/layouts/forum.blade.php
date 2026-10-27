@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mindet</title>
+    <link rel="icon" type="image/png" href="{{ asset('image/Mindet_Logo.png') }}">
     
     <!-- Modern Font: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
