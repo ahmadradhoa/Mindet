@@ -24,6 +24,6 @@ class ProfileController extends Controller
             'profile_picture' => $request->profile_picture, 
         ]);
 
-        return back()->with('success', 'Profil berhasil diperbarui!');
+        return back()->with('success', 'Your profile has been successfully updated!');
     }
 }

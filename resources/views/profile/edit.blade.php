@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card card-modern p-4">
-            <h4 class="fw-bold mb-4"><i class="bi bi-person-gear me-2"></i>Pengaturan Profil</h4>
+            <h4 class="fw-bold mb-4"><i class="bi bi-person-gear me-2"></i>Profile Settings</h4>
             
             <form method="POST" action="{{ route('profile.update') }}">
                 @csrf 
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label fw-semibold mb-3">Pilih Warna Avatar</label>
+                    <label class="form-label fw-semibold mb-3">Choose a Profile Color</label>
                     <div class="d-flex gap-3 flex-wrap">
                         @php 
                             $colors = ['#6366f1', '#ef4444', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4', '#f97316'];
@@ -61,8 +61,8 @@
                 </script>
 
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                    <a href="{{ route('posts.index') }}" class="btn btn-outline-secondary">Batal</a>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{{ route('posts.index') }}" class="btn btn-outline-secondary">Cancel</a>
                 </div>
             </form>
         </div>

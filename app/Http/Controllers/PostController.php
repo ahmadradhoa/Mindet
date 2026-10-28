@@ -42,7 +42,7 @@ class PostController extends Controller
         $data['user_id'] = auth()->id();
         Post::create($data);
 
-        return redirect()->route('posts.index')->with('success', 'Postingan berhasil dibuat!');
+        return redirect()->route('posts.index')->with('success', 'The post was successfully published!');
     }
 
     public function show(Post $post)
@@ -53,14 +53,14 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        abort_unless($post->user_id === auth()->id(), 403, 'Ini bukan postinganmu.');
+        abort_unless($post->user_id === auth()->id(), 403, 'This is not your post!');
         $categories = Category::orderBy('name')->get();
         return view('posts.edit', compact('post', 'categories'));
     }
 
     public function update(Request $request, Post $post)
     {
-        abort_unless($post->user_id === auth()->id(), 403, 'Ini bukan postinganmu.');
+        abort_unless($post->user_id === auth()->id(), 403, 'This is not your post!');
 
         $post->update($request->validate([
             'category_id' => 'required|exists:categories,id',
@@ -68,13 +68,13 @@ class PostController extends Controller
             'body' => 'required|string|min:1',
         ]));
 
-        return redirect()->route('posts.show', $post)->with('success', 'Postingan diperbarui.');
+        return redirect()->route('posts.show', $post)->with('success', 'Post updated!');
     }
 
     public function destroy(Post $post)
     {
-        abort_unless($post->user_id === auth()->id(), 403, 'Ini bukan postinganmu.');
+        abort_unless($post->user_id === auth()->id(), 403, 'This is not your post!');
         $post->delete();
-        return redirect()->route('posts.index')->with('success', 'Postingan dihapus.');
+        return redirect()->route('posts.index')->with('success', 'Post deleted!');
     }
 }

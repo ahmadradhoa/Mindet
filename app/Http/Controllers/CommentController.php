@@ -17,13 +17,13 @@ class CommentController extends Controller
             'body' => $request->body,
         ]);
 
-        return back()->with('success', 'Komentar terkirim.');
+        return back()->with('success', 'Comment posted!');
     }
 
     public function destroy(Comment $comment)
     {
         abort_unless($comment->user_id === auth()->id(), 403);
         $comment->delete();
-        return back()->with('success', 'Komentar dihapus.');
+        return back()->with('success', 'Comment deleted!');
     }
 }
