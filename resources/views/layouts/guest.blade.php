@@ -112,6 +112,52 @@
             [data-theme="dark"] input::placeholder {
                 color: #64748b !important;
             }
+
+            @media (max-width: 640px) {
+                body {
+                    padding: 10px !important;
+                }
+                
+                .w-full.sm\:max-w-md {
+                    border-radius: 16px !important;
+                    padding: 20px !important;
+                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2) !important;
+                    margin-top: 20px !important;
+                }
+
+                .theme-toggle-btn {
+                    top: 15px;
+                    right: 15px;
+                    width: 38px;
+                    height: 38px;
+                }
+                .theme-toggle-btn svg {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                .min-h-screen > div:first-child img {
+                    width: 100px !important;
+                }
+                .min-h-screen > div:first-child h4 {
+                    font-size: 1.3rem !important;
+                }
+
+                .flex.items-center.justify-end.mt-4 {
+                    flex-direction: column; 
+                    align-items: stretch !important;
+                    gap: 10px;
+                }
+                .flex.items-center.justify-end.mt-4 button[type="submit"] {
+                    width: 100%; 
+                    justify-content: center;
+                    padding: 10px !important;
+                }
+                .flex.items-center.justify-end.mt-4 a {
+                    text-align: center;
+                    margin-top: 5px;
+                }
+            }
         </style>
     </head>
     

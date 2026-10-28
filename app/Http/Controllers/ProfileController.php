@@ -16,23 +16,14 @@ class ProfileController extends Controller
         
         $request->validate([
             'name' => 'required|string|max:255',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'profile_picture' => 'required|regex:/^#[0-9A-Fa-f]{6}$/',
         ]);
 
-        $data = ['name' => $request->name];
+        $user->update([
+            'name' => $request->name,
+            'profile_picture' => $request->profile_picture, 
+        ]);
 
-        if ($request->hasFile('profile_picture')) {
-            if ($user->profile_picture && file_exists(public_path('images/profiles/' . $user->profile_picture))) {
-                unlink(public_path('images/profiles/' . $user->profile_picture));
-            }
-            
-            $file = $request->file('profile_picture');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('images/profiles'), $filename);
-            $data['profile_picture'] = $filename;
-        }
-
-        $user->update($data);
         return back()->with('success', 'Profil berhasil diperbarui!');
     }
 }

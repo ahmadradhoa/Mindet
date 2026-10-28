@@ -47,14 +47,18 @@
 @forelse($posts as $p)
 <div class="card card-modern mb-3 p-3">
     <div class="d-flex gap-3">
-                <!-- Avatar User -->
         <div class="flex-shrink-0 text-center">
             @php
-                $postAvatar = $p->user->profile_picture 
-                    ? asset('images/profiles/' . $p->user->profile_picture) 
-                    : 'https://ui-avatars.com/api/?name=' . urlencode($p->user->name) . '&background=random&color=fff&rounded=true';
+                $avatarColor = $p->user->profile_picture ?? '#6366f1';
+                
+                $initials = strtoupper(substr($p->user->name, 0, 2));
             @endphp
-            <img src="{{ $postAvatar }}" class="avatar mb-1" alt="{{ $p->user->name }}">
+            
+            <div class="d-flex align-items-center justify-content-center text-white fw-bold rounded-circle mx-auto mb-1" 
+                style="background-color: {{ $avatarColor }}; width: 40px; height: 40px; font-size: 14px;">
+                {{ $initials }}
+            </div>
+            
             <div class="small text-muted" style="font-size: 0.7rem;">{{ $p->created_at->diffForHumans() }}</div>
         </div>
         
@@ -83,11 +87,10 @@
             <i class="bi bi-pencil me-1"></i> Edit
         </a>
 
-        <form action="{{ route('posts.destroy', $p) }}" method="POST" class="d-inline form-delete">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-outline-danger btn-sm">
-                <i class="bi bi-trash me-1"></i> Hapus
+        <form action="{{ route('posts.destroy', $p) }}" method="POST" class="d-inline delete-form">
+            @csrf @method('DELETE')
+            <button class="btn btn-outline-danger btn-sm" onclick="event.stopPropagation()">
+                <i class="bi bi-trash"></i> Hapus
             </button>
         </form>
     @endif

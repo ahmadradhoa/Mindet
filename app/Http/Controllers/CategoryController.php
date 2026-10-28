@@ -47,11 +47,9 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        try {
-            $category->delete();
-            return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus.');
-        } catch (\Exception $e) {
-            return back()->with('error', 'Kategori tidak bisa dihapus karena masih memiliki postingan.');
-        }
+        $category->delete(); 
+        
+        return redirect()->route('categories.index')
+            ->with('success', 'Kategori dan semua postingannya berhasil dihapus.');
     }
 }

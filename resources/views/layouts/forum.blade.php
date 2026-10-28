@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mindet</title>
+
     <link rel="icon" type="image/png" href="{{ asset('image/Mindet_Logo.png') }}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -203,6 +204,153 @@
             border-color: #334155;
             color: var(--text-main);
         }
+
+        .swal2-popup {
+            background-color: var(--card-bg) !important;
+            color: var(--text-main) !important;
+            border-radius: 16px !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem !important;
+        }
+        [data-theme="dark"] .swal2-popup {
+            border-color: #334155 !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5) !important;
+        }
+        .swal2-title {
+            color: var(--text-main) !important;
+            font-weight: 700 !important;
+            font-size: 1.25rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        .swal2-html-container {
+            color: var(--text-muted) !important;
+            font-size: 0.95rem !important;
+            line-height: 1.5 !important;
+            margin: 0 !important;
+        }
+        .swal2-confirm {
+            background-color: #ef4444 !important;
+            border: none !important;
+            border-radius: 10px !important;
+            font-weight: 600 !important;
+            padding: 0.6rem 1.2rem !important;
+            font-size: 0.9rem !important;
+        }
+        .swal2-confirm:hover {
+            background-color: #dc2626 !important;
+        }
+        .swal2-cancel {
+            background-color: #e2e8f0 !important;
+            color: #475569 !important;
+            border: none !important;
+            border-radius: 10px !important;
+            font-weight: 600 !important;
+            padding: 0.6rem 1.2rem !important;
+            font-size: 0.9rem !important;
+        }
+        [data-theme="dark"] .swal2-cancel {
+            background-color: #334155 !important;
+            color: #cbd5e1 !important;
+        }
+        .swal2-cancel:hover {
+            background-color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .swal2-cancel:hover {
+            background-color: #475569 !important;
+        }
+        .swal2-icon.swal2-warning {
+            border-color: #f59e0b !important;
+            color: #f59e0b !important;
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar {
+                padding: 0.5rem 0 !important;
+            }
+            .navbar-brand {
+                font-size: 1.2rem !important;
+            }
+            .navbar-brand img {
+                height: 28px !important;
+            }
+            
+            .container {
+                padding-left: 12px !important;
+                padding-right: 12px !important;
+            }
+            
+            .d-flex.justify-content-between {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 10px;
+            }
+            .d-flex.justify-content-between h2 {
+                font-size: 1.3rem !important;
+            }
+            .d-flex.justify-content-between p {
+                font-size: 0.85rem !important;
+            }
+            
+            .d-flex.justify-content-between .btn-primary {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            
+            .card-modern.p-4 {
+                padding: 1rem !important;
+            }
+            .row.g-3 {
+                gap: 8px;
+            }
+            .col-md-5, .col-md-2 {
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+            }
+            .col-md-2.d-flex {
+                margin-top: 5px;
+            }
+            .col-md-2 .btn {
+                flex: 1;
+            }
+            
+            .card-modern.mb-3.p-3 {
+                padding: 0.8rem !important;
+                margin-bottom: 0.8rem !important;
+            }
+            .card-modern.mb-3.p-3 h5 {
+                font-size: 1rem !important;
+            }
+            .card-modern.mb-3.p-3 p {
+                font-size: 0.85rem !important;
+                line-height: 1.5 !important;
+            }
+            
+            .avatar {
+                width: 32px !important;
+                height: 32px !important;
+            }
+            
+            .d-none.d-sm-block {
+                display: none !important;
+            }
+            
+            .badge-category {
+                font-size: 0.7rem !important;
+                padding: 0.3em 0.6em !important;
+            }
+            
+            .btn-link, .btn-outline-danger.btn-sm {
+                font-size: 0.8rem !important;
+                padding: 0.2rem 0.5rem !important;
+            }
+            
+            footer {
+                padding: 1.5rem 0 !important;
+                font-size: 0.75rem !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -234,12 +382,17 @@
 
         <div class="dropdown">
             @php
-                $navAvatar = auth()->user()->profile_picture 
-                    ? asset('images/profiles/' . auth()->user()->profile_picture) 
-                    : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) . '&background=6366f1&color=fff&rounded=true';
+                $avatarColor = auth()->user()->profile_picture ?? '#6366f1';
+                
+                $initials = strtoupper(substr(auth()->user()->name, 0, 2));
             @endphp
+
             <a href="#" class="d-flex align-items-center gap-2 text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="color: var(--text-main);">
-                <img src="{{ $navAvatar }}" class="avatar" alt="User">
+                <div class="d-flex align-items-center justify-content-center text-white fw-bold rounded-circle" 
+                    style="background-color: {{ $avatarColor }}; width: 40px; height: 40px; font-size: 14px; flex-shrink: 0;">
+                    {{ $initials }}
+                </div>
+                
                 <span class="fw-semibold small d-none d-md-block">{{ auth()->user()->name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4">
@@ -287,33 +440,71 @@
 
 <script>
     @if(session('error'))
-        Swal.fire({ icon: 'error', title: 'Oops...', text: '{{ session('error') }}' });
+        Swal.fire({ icon: 'error', title: 'Gagal', text: '{{ session('error') }}' });
     @endif
 
-const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
-const themeIcons = document.querySelectorAll('#theme-icon, #theme-icon-mobile');
-
-function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.setAttribute('data-bs-theme', theme);
-    localStorage.setItem('theme', theme);
-    updateIcons(theme);
-}
-
-function updateIcons(theme) {
-    themeIcons.forEach(icon => {
-        icon.className = theme === 'light' ? 'bi bi-moon-stars-fill' : 'bi bi-sun-fill';
-    });
-}
-
-applyTheme(localStorage.getItem('theme') || 'light');
-
-themeToggles.forEach(toggle => {
-    toggle.addEventListener('click', () => {
-        const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        applyTheme(newTheme);
+document.querySelectorAll('.delete-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        Swal.fire({
+            html: `
+                <div class="text-start">
+                    <p class="mb-0" style="color: var(--text-main); font-size: 1rem;">
+                        <i class="bi bi-exclamation-triangle-fill text-warning me-2" style="font-size: 1.1rem;"></i>
+                        Yakin ingin menghapus?
+                    </p>
+                    <p class="text-muted small mt-2 mb-0">
+                        Data yang dihapus tidak dapat dikembalikan.
+                    </p>
+                </div>
+            `,
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#94a3b8',
+            confirmButtonText: 'Ya, Hapus',
+            cancelButtonText: 'Batal',
+            reverseButtons: true,
+            customClass: {
+                popup: 'rounded-3 shadow-sm border-0',
+                confirmButton: 'rounded-2 px-4 py-2 fw-semibold',
+                cancelButton: 'rounded-2 px-4 py-2 fw-semibold'
+            },
+            buttonsStyling: true,
+            width: '400px',
+            padding: '1.5rem'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+        });
     });
 });
+
+    const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+    const themeIcons = document.querySelectorAll('#theme-icon, #theme-icon-mobile');
+
+    function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-bs-theme', theme);
+        localStorage.setItem('theme', theme);
+        updateIcons(theme);
+    }
+
+    function updateIcons(theme) {
+        themeIcons.forEach(icon => {
+            icon.className = theme === 'light' ? 'bi bi-moon-stars-fill' : 'bi bi-sun-fill';
+        });
+    }
+
+    applyTheme(localStorage.getItem('theme') || 'light');
+
+    themeToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+        });
+    });
 </script>
 </body>
 </html>

@@ -33,10 +33,24 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $colorPalette = [
+            '#6366f1', // Indigo (Default Mindent)
+            '#ef4444', // Merah
+            '#10b981', // Hijau Emerald
+            '#f59e0b', // Kuning Amber
+            '#ec4899', // Pink
+            '#8b5cf6', // Ungu Violet
+            '#06b6d4', // Cyan
+            '#f97316', // Orange
+        ];
+
+        $randomColor = $colorPalette[array_rand($colorPalette)];
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'profile_picture' => $randomColor,
         ]);
 
         event(new Registered($user));

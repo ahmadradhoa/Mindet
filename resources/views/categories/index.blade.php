@@ -28,11 +28,12 @@
             <div class="d-flex gap-2 mt-auto">
                 <a href="{{ route('posts.index', ['category_id' => $c->id]) }}" class="btn btn-outline-primary btn-sm flex-grow-1">Lihat Diskusi</a>
                 <a href="{{ route('categories.edit', $c) }}" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil"></i></a>
-                <form action="{{ route('categories.destroy', $c) }}" method="POST" class="d-inline">
-                    @csrf @method('DELETE')
-                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
-                </a>
-            </div is>
+                
+<form action="{{ route('categories.destroy', $c) }}" method="POST" class="d-inline delete-form">
+    @csrf @method('DELETE')
+    <button class="btn btn-outline-danger btn-sm" type="submit"><i class="bi bi-trash"></i></button>
+</form>
+            </div>
         </div>
     </div>
 @empty

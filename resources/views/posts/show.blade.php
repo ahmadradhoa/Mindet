@@ -7,7 +7,17 @@
 
 <div class="card card-modern p-4 mb-4">
     <div class="d-flex align-items-center gap-3 mb-3">
-        <img src="https://ui-avatars.com/api/?name={{ urlencode($post->user->name) }}&background=6366f1&color=fff&rounded=true" class="avatar" alt="User">
+        @php
+            $avatarColor = $post->user->profile_picture ?? '#6366f1';
+            
+            $initials = strtoupper(substr($post->user->name, 0, 2));
+        @endphp
+        
+        <div class="d-flex align-items-center justify-content-center text-white fw-bold rounded-circle" 
+            style="background-color: {{ $avatarColor }}; width: 40px; height: 40px; font-size: 14px; flex-shrink: 0;">
+            {{ $initials }}
+        </div>
+        
         <div>
             <div class="fw-bold">{{ $post->user->name }}</div>
             <div class="text-muted small">{{ $post->created_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') }} • <span class="badge-category">{{ $post->category->name }}</span></div>
@@ -20,10 +30,10 @@
     @if($post->user_id === auth()->id())
         <div class="d-flex gap-2 mt-4 pt-3 border-top">
             <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil"></i> Edit Postingan</a>
-            <form method="POST" action="{{ route('posts.destroy', $post) }}" class="d-inline">
-                @csrf @method('DELETE')
-                <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Hapus Postingan</button>
-            </form>
+                <form method="POST" action="{{ route('posts.destroy', $post) }}" class="d-inline delete-form">
+                    @csrf @method('DELETE')
+                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Hapus Postingan</button>
+                </form>
         </div>
     @endif
 </div>
@@ -34,7 +44,17 @@
 <div class="card card-modern mb-3 p-3 ms-md-4 border-start border-4 border-primary">
     <div class="d-flex justify-content-between align-items-start">
         <div class="d-flex gap-2">
-            <img src="https://ui-avatars.com/api/?name={{ urlencode($c->user->name) }}&background=random&color=fff&rounded=true" class="avatar" style="width:32px; height:32px;" alt="User">
+            @php
+                $avatarColor = $c->user->profile_picture ?? '#6366f1';
+                
+                $initials = strtoupper(substr($c->user->name, 0, 2));
+            @endphp
+            
+            <div class="d-flex align-items-center justify-content-center text-white fw-bold rounded-circle flex-shrink-0" 
+                style="background-color: {{ $avatarColor }}; width: 32px; height: 32px; font-size: 11px;">
+                {{ $initials }}
+            </div>
+            
             <div>
                 <div class="fw-semibold small">{{ $c->user->name }}</div>
                 <div class="text-muted" style="font-size: 0.8rem;">{{ $c->created_at->diffForHumans() }}</div>
@@ -42,7 +62,7 @@
             </div>
         </div>
         @if($c->user_id === auth()->id())
-            <form method="POST" action="{{ route('comments.destroy', $c) }}">
+            <form method="POST" action="{{ route('comments.destroy', $c) }}" class="d-inline delete-form">
                 @csrf @method('DELETE')
                 <button class="btn btn-link text-danger text-decoration-none p-0" style="font-size: 0.8rem;"><i class="bi bi-trash"></i></button>
             </form>

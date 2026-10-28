@@ -65,7 +65,7 @@ class PostController extends Controller
         $post->update($request->validate([
             'category_id' => 'required|exists:categories,id',
             'title' => 'required|string|max:255',
-            'body' => 'required|string|min:10',
+            'body' => 'required|string|min:1',
         ]));
 
         return redirect()->route('posts.show', $post)->with('success', 'Postingan diperbarui.');
