@@ -2,7 +2,7 @@
 @section('content')
 
 <a href="{{ route('posts.index') }}" class="btn btn-outline-secondary btn-sm mb-4 rounded-pill px-3">
-    <i class="bi bi-arrow-left"></i> Kembali ke Beranda
+    <i class="bi bi-arrow-left"></i> Back
 </a>
 
 <div class="card card-modern p-4 mb-4">
@@ -29,16 +29,16 @@
 
     @if($post->user_id === auth()->id())
         <div class="d-flex gap-2 mt-4 pt-3 border-top">
-            <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil"></i> Edit Postingan</a>
+            <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil"></i> Edit</a>
                 <form method="POST" action="{{ route('posts.destroy', $post) }}" class="d-inline delete-form">
                     @csrf @method('DELETE')
-                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Hapus Postingan</button>
+                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Delete</button>
                 </form>
         </div>
     @endif
 </div>
 
-<h5 class="fw-bold mb-3"><i class="bi bi-chat-left-text me-2"></i>{{ $post->comments->count() }} Komentar</h5>
+<h5 class="fw-bold mb-3"><i class="bi bi-chat-left-text me-2"></i>{{ $post->comments->count() }} Comments</h5>
 
 @foreach($post->comments->sortBy('created_at') as $c)
 <div class="card card-modern mb-3 p-3 ms-md-4 border-start border-4 border-primary">
@@ -72,11 +72,11 @@
 @endforeach
 
 <div class="card card-modern p-4 ms-md-4 mt-4 bg-light">
-    <h6 class="fw-bold mb-3">Tulis Komentar</h6>
+    <h6 class="fw-bold mb-3">Write a comment</h6>
     <form method="POST" action="{{ route('comments.store', $post) }}">
         @csrf
         <textarea name="body" class="form-control mb-3" rows="3" placeholder="Apa pendapatmu tentang ini?" required></textarea>
-        <button class="btn btn-primary"><i class="bi bi-send-fill me-1"></i> Kirim Komentar</button>
+        <button class="btn btn-primary"><i class="bi bi-send-fill me-1"></i> Post</button>
     </form>
 </div>
 

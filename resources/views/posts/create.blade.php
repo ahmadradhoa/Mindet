@@ -1,6 +1,6 @@
 @extends('layouts.forum')
 @section('content')
-<h4 class="mb-3">Buat Postingan Baru</h4>
+<h4 class="mb-3">Create a Post</h4>
 <div class="card p-4">
 <form method="POST" action="{{ route('posts.store') }}">
   @csrf

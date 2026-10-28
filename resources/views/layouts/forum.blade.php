@@ -364,19 +364,19 @@
     
     <div class="d-flex gap-2 align-items-center">
       <a class="btn btn-outline-secondary btn-sm d-none d-md-inline-flex align-items-center gap-1" href="{{ route('posts.index') }}">
-        <i class="bi bi-house"></i> Beranda
+        <i class="bi bi-house"></i> Home
       </a>
       <a class="btn btn-outline-secondary btn-sm d-none d-md-inline-flex align-items-center gap-1" href="{{ route('categories.index') }}">
-        <i class="bi bi-grid"></i> Kategori
+        <i class="bi bi-grid"></i> Category
       </a>
       <a class="btn btn-primary btn-sm d-none d-md-inline-flex align-items-center gap-1" href="{{ route('posts.create') }}">
-        <i class="bi bi-plus-lg"></i> Posting
+        <i class="bi bi-plus-lg"></i> Post
       </a>
       
       @auth
         <div class="vr mx-2 d-none d-md-block"></div>
         
-        <button id="theme-toggle" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; padding: 0;" title="Ganti Mode Gelap/Terang">
+        <button id="theme-toggle" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; padding: 0;" title="Switch Dark/Light Mode">
             <i class="bi bi-moon-stars-fill" id="theme-icon"></i>
         </button>
 
@@ -396,7 +396,7 @@
                 <span class="fw-semibold small d-none d-md-block">{{ auth()->user()->name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4">
-                <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="bi bi-person-gear me-2"></i>Pengaturan Profil</a></li>
+                <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="bi bi-person-gear me-2"></i>Profile Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
@@ -440,7 +440,7 @@
 
 <script>
     @if(session('error'))
-        Swal.fire({ icon: 'error', title: 'Gagal', text: '{{ session('error') }}' });
+        Swal.fire({ icon: 'error', title: 'Fail', text: '{{ session('error') }}' });
     @endif
 
 document.querySelectorAll('.delete-form').forEach(form => {
@@ -452,18 +452,18 @@ document.querySelectorAll('.delete-form').forEach(form => {
                 <div class="text-start">
                     <p class="mb-0" style="color: var(--text-main); font-size: 1rem;">
                         <i class="bi bi-exclamation-triangle-fill text-warning me-2" style="font-size: 1.1rem;"></i>
-                        Yakin ingin menghapus?
+                        Are you sure you want to delete this?
                     </p>
                     <p class="text-muted small mt-2 mb-0">
-                        Data yang dihapus tidak dapat dikembalikan.
+                        Deleted data cannot be recovered
                     </p>
                 </div>
             `,
             showCancelButton: true,
             confirmButtonColor: '#ef4444',
             cancelButtonColor: '#94a3b8',
-            confirmButtonText: 'Ya, Hapus',
-            cancelButtonText: 'Batal',
+            confirmButtonText: 'Delete',
+            cancelButtonText: 'Cancel',
             reverseButtons: true,
             customClass: {
                 popup: 'rounded-3 shadow-sm border-0',
