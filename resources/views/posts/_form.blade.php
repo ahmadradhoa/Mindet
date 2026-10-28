@@ -18,5 +18,7 @@
   <label class="form-label">Content</label>
   <textarea name="body" class="form-control" rows="6" required>{{ old('body', $post->body ?? '') }}</textarea>
 </div>
-<button class="btn btn-primary">Post</button>
-<a href="{{ route('posts.index') }}" class="btn btn-secondary">Cancel</a>
+<div class="d-flex gap-2">
+  <button type="submit" class="btn btn-primary btn-form">Post</button>
+  <a href="{{ route('posts.index') }}" class="btn btn-outline-secondary btn-form">Cancel</a>
+</div>

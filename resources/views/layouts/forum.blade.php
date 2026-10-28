@@ -341,7 +341,9 @@
                 padding: 0.3em 0.6em !important;
             }
             
-            .btn-link, .btn-outline-danger.btn-sm {
+            .btn-link,
+            .btn-outline-danger.btn-sm,
+            .btn-outline-warning.btn-sm {
                 font-size: 0.8rem !important;
                 padding: 0.2rem 0.5rem !important;
             }
@@ -350,6 +352,48 @@
                 padding: 1.5rem 0 !important;
                 font-size: 0.75rem !important;
             }
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 1030;
+            display: flex;
+            background: var(--card-bg);
+            border-top: 1px solid #e2e8f0;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        [data-theme="dark"] .bottom-nav { border-top-color: #334155; }
+        .bottom-nav a {
+            flex: 1;
+            text-align: center;
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .bottom-nav a i { display: block; font-size: 1.3rem; }
+        .bottom-nav a.active { color: var(--primary-color); }
+
+        @media (max-width: 767.98px) {
+            body { padding-bottom: 70px; }
+        }
+
+        .btn-primary.btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 400;
+            border-radius: 0.375rem;
+        }
+        .btn-outline-secondary.btn-sm {
+            border-radius: 0.375rem;
+        }
+
+        .btn-form {
+            padding: 0.6rem 1.4rem;
+            border-radius: 10px;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -434,6 +478,18 @@
 <footer class="text-center text-muted small py-5 mt-5">
     <p class="mb-0">© 2026 <strong>Mindet</strong></p>
 </footer>
+
+<nav class="bottom-nav d-md-none">
+    <a href="{{ route('posts.index') }}" class="{{ request()->routeIs('posts.index') ? 'active' : '' }}">
+        <i class="bi bi-house"></i>Home
+    </a>
+    <a href="{{ route('categories.index') }}" class="{{ request()->routeIs('categories.*') ? 'active' : '' }}">
+        <i class="bi bi-grid"></i>Category
+    </a>
+    <a href="{{ route('posts.create') }}" class="{{ request()->routeIs('posts.create') ? 'active' : '' }}">
+        <i class="bi bi-plus-circle"></i>Post
+    </a>
+</nav>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

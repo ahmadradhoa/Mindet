@@ -62,10 +62,10 @@
             <div class="small text-muted" style="font-size: 0.7rem;">{{ $p->created_at->diffForHumans() }}</div>
         </div>
         
-        <div class="flex-grow-1">
-            <div class="d-flex align-items-center gap-2 mb-1">
+        <div class="flex-grow-1" style="min-width: 0;">
+            <div class="d-flex align-items-center flex-wrap gap-2 mb-1">
                 <span class="badge-category">{{ $p->category->name }}</span>
-                <span class="text-muted small">• From <strong>{{ $p->user->name }}</strong></span>
+                <span class="text-muted small text-break">• From <strong>{{ $p->user->name }}</strong></span>
             </div>
             
             <h5 class="fw-bold mb-2">
@@ -75,26 +75,31 @@
             </h5>
             <p class="text-muted small mb-3" style="line-height: 1.6;">{{ Str::limit($p->body, 180) }}</p>
             
-<div class="d-flex align-items-center gap-3 text-muted small position-relative" style="z-index: 2;">
-    <span class="d-flex align-items-center gap-1">
-        <i class="bi bi-chat-dots"></i> {{ $p->comments_count }} Comments
-    </span>
+            <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 gap-md-3 text-muted small position-relative" style="z-index: 2;">
+                <span class="d-flex align-items-center gap-1 text-nowrap">
+                    <i class="bi bi-chat-dots"></i> {{ $p->comments_count }} Comments
+                </span>
 
-    @if($p->user_id === auth()->id())
-        <div class="vr"></div>
+                @if($p->user_id === auth()->id())
+                    <div class="vr d-none d-md-block"></div>
 
-        <a href="{{ route('posts.edit', $p) }}" class="btn btn-outline-warning btn-sm">
-            <i class="bi bi-pencil me-1"></i> Edit
-        </a>
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="{{ route('posts.edit', $p) }}"
+                        class="btn btn-outline-warning btn-sm d-inline-flex align-items-center gap-1 text-nowrap">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
 
-        <form action="{{ route('posts.destroy', $p) }}" method="POST" class="d-inline delete-form">
-            @csrf @method('DELETE')
-            <button class="btn btn-outline-danger btn-sm" onclick="event.stopPropagation()">
-                <i class="bi bi-trash"></i> Delete
-            </button>
-        </form>
-    @endif
-</div>
+                        <form action="{{ route('posts.destroy', $p) }}" method="POST" class="m-0 delete-form">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-1 text-nowrap">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 </div>
